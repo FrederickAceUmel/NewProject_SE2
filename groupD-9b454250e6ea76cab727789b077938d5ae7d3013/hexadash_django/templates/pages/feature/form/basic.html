@@ -1,0 +1,335 @@
+{% extends 'layout/app.html' %}
+
+{% block title %} Basic Form {% endblock %}
+
+{% load i18n %}
+
+{% load static %}
+
+{% block content %}
+<div class="dm-page-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-main">
+                    <h4 class="text-capitalize breadcrumb-title">{% translate "form-basic" %}</h4>
+                    <div class="breadcrumb-action justify-content-center flex-wrap">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#"><i class="las la-home"></i>{% translate "form-menu-title" %}</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">{% translate "form-basic" %}</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="card card-default card-md mb-4">
+                    <div class="card-header">
+                        <h6>Personal Information</h6>
+                    </div>
+                    <div class="card-body pb-md-50">
+                        <form class="was-validated">
+                            <div class="row mx-n15">
+                                <div class="col-md-4 mb-3 px-15">
+                                    <label for="validationServer01" class="il-gray fs-14 fw-500 align-center mb-10">Full
+                                        Name</label>
+                                    <input type="text" class="form-control is-invalid ih-medium ip-light radius-xs b-light" id="validationServer01" placeholder="Full Name" required>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3 px-15">
+                                    <label for="validationServer02" class="il-gray fs-14 fw-500 align-center mb-10">Contact
+                                        Number</label>
+                                    <input type="number" class="form-control is-invalid ih-medium ip-light radius-xs b-light" id="validationServer02" placeholder="017123456789" required>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3 px-15">
+                                    <label for="validationDefault01" class="il-gray fs-14 fw-500 align-center mb-10">Email Address (optional)</label>
+                                    <input type="text" class="form-control is-valid ih-medium ip-light radius-xs b-light" id="validationDefault01" placeholder="username@email.com">
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mx-n15">
+                                <div class="col-md-4 mb-3 px-15">
+                                        <label for="datepicker8" class="il-gray fs-14 fw-500 align-center mb-10">Date of Birth</label>
+                                    <div class="position-relative">
+                                        <input type="text" class="form-control  ih-medium ip-light radius-xs b-light px-15" id="datepicker8" placeholder="01/10/2021" required>
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3 px-15">
+                                    <label for="validationServer04" class="il-gray fs-14 fw-500 align-center mb-10">Permanent Address</label>
+                                    <textarea class="form-control is-valid ih-medium ip-light radius-xs b-light" id="validationServer04" aria-describedby="validationServer04Feedback" rows="2" style="resize: none;" required></textarea>
+                                    <div id="validationServer04Feedback" class="invalid-feedback">
+                                        Please enter a valid address.
+                                    </div>
+                                </div>
+                                <div class="col-md-5 mb-3 px-15">
+                                    <label for="validationServer05" class="il-gray fs-14 fw-500 align-center mb-10">Proof of Residency (e.g. utility bills, barangay clearance)</label>
+                                        <input class="form-control is-valid custom-file-input" type="file" id="validationServer05" aria-describedby="validationServer05Feedback" required>
+                                    <div id="validationServer05Feedback" class="invalid-feedback">
+                                        Please provide an attachment.
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="card card-default card-md mb-4">
+                    <div class="card-header">
+                        <h6>Household Information</h6>
+                    </div>
+                    <div class="card-body pb-md-50">
+                        <form class="was-validated">
+                            <div class="row mx-n15">
+                              <div class="col-md-4 mb-3 px-15">
+                                <label for="validationServer06" class="il-gray fs-14 fw-500 align-center mb-10">Total Number of Household Members</label>
+                                <input type="number" oninput="this.value = this.value.replace(/[^0-9]/g, '')" min="0" max="25" class="form-control is-invalid ih-medium ip-light radius-xs b-light" id="validationServer06" required>
+                                <div class="valid-feedback">Looks good!</div>
+                              </div>
+                              <div class="col-md-4 mb-3 px-15">
+                                <label for="validationServer07" class="il-gray fs-14 fw-500 align-center mb-10">Special Categories (Select Applicable)</label>
+                                <div class="checkbox-group">
+                                  <div class="checkbox-theme-default custom-checkbox">
+                                    <input class="checkbox" type="checkbox" name="special-categories" id="check-un1" onclick="validateBoxes(this)">
+                                    <label for="check-un1">
+                                      <span class="checkbox-text">Elderly (60+ years old)</span>
+                                    </label>
+                                  </div>
+                                  <div class="checkbox-theme-default custom-checkbox">
+                                    <input class="checkbox" type="checkbox" name="special-categories" id="check-un2" onclick="validateBoxes(this)">
+                                    <label for="check-un2">
+                                      <span class="checkbox-text">Children (under 18)</span>
+                                    </label>
+                                  </div>
+                                  <div class="checkbox-theme-default custom-checkbox">
+                                    <input class="checkbox" type="checkbox" name="special-categories" id="check-un3" onclick="validateBoxes(this)">
+                                    <label for="check-un3">
+                                      <span class="checkbox-text">Persons with Disabilities</span>
+                                    </label>
+                                  </div>
+                                  <div class="checkbox-theme-default custom-checkbox">
+                                    <input class="checkbox" type="checkbox" name="special-categories" id="check-un4" onclick="validateBoxes(this)">
+                                    <label for="check-un4">
+                                      <span class="checkbox-text">Pregnant Household Member</span>
+                                    </label>
+                                  </div>
+                                </div>
+                                <div id="checkbox-error" class="invalid-feedback" style="display: none;">Please select at least one option.</div>
+                              </div>
+                              <div class="col-md-4 mb-3 px-15">
+                                <label for="dropzone1" class="il-gray fs-14 fw-500 align-center mb-10">Valid ID for all adult members</label>
+                                <div class="dm-upload-avatar media-import dropzone-md-s">
+                                  <p class="color-light mt-0 fs-14">Drop files here to upload</p>
+                                </div>
+                                <div class="avatar-up">
+                                  <input type="file" name="upload-avatar-input" class="upload-avatar-input" required>
+                                </div>
+                                </div>
+                            <div id="member-inputs"></div>
+                            <button type="button" class="btn btn-primary" onclick="generateMemberInputs()">Add Members</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div id="householdMembers" class="col-lg-12 d-none">
+                <div class="card card-default card-md mb-4">
+                    <div class="card-header">
+                        <h6>Household Members Information</h6>
+                    </div>
+                    <div class="card-body pb-md-50">
+                        <form class="was-validated" id="householdForm">
+                            <div class="row mx-n15" id="memberInputs">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="card card-default card-md mb-4">
+                    <div class="card-header">
+                        <h6>Financial Information</h6>
+                    </div>
+                    <div class="card-body pb-md-50">
+                        <form class="was-validated">
+                            <div class="row mx-n15">
+                                <div class="col-md-3 mb-3 px-15">
+                                    <label for="validationServer08" class="il-gray fs-14 fw-500 align-center mb-10">Employment Status (Select 1)</label>
+                                    <div class="checkbox-theme-default custom-checkbox">
+                                        <input class="checkbox" type="checkbox" name="employment" id="check-un5" onclick="handleEmployment(this)">
+                                        <label for="check-un5">
+                                            <span class="checkbox2-text">Employed</span>
+                                        </label>
+                                    </div>
+                                    <div class="checkbox-theme-default custom-checkbox">
+                                        <input class="checkbox" type="checkbox" name="employment" id="check-un6" onclick="handleEmployment(this)">
+                                        <label for="check-un6">
+                                            <span class="checkbox2-text">Unemployed</span>
+                                        </label>
+                                    </div>
+                                    <div class="checkbox-theme-default custom-checkbox">
+                                        <input class="checkbox" type="checkbox" name="employment" id="check-un7" onclick="handleEmployment(this)">
+                                        <label for="check-un7">
+                                            <span class="checkbox2-text">Underemployed</span>
+                                        </label>
+                                    </div>
+                                    <div class="checkbox-theme-default custom-checkbox">
+                                        <input class="checkbox" type="checkbox" name="employment" id="check-un8" onclick="handleEmployment(this)">
+                                        <label for="check-un8">
+                                            <span class="checkbox2-text">Disabled/Unable to work</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row mx-n15">
+                                <div class="col-md-3 mb-3 px-15">
+                                    <label for="validationDefault02" class="il-gray fs-14 fw-500 align-center mb-10">Monthly Household Income ₱</label>
+                                    <input type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="form-control is-valid ih-medium ip-light radius-xs b-light" id="validationDefault02" disabled>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3 px-15">
+                                    <label for="validationDefault03" class="il-gray fs-14 fw-500 align-center mb-10">Are you currently
+                                        receiving any form of government aid?
+                                    </label>
+                                    <div class="radio-theme-default custom-radio ">
+                                        <input class="radio" type="radio" name="radio-default" value=0 id="radio-un4" checked>
+                                        <label for="radio-un4">
+                                            <span class="radio-text">Yes</span>
+                                        </label>
+                                    </div>
+                                    <div class="radio-theme-default custom-radio ">
+                                        <input class="radio" type="radio" name="radio-default" value=0 id="radio-un2">
+                                        <label for="radio-un2">
+                                            <span class="radio-text">No</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3 px-15">
+                                    <label for="dropzone2" class="il-gray fs-14 fw-500 align-center mb-10">Income Verification
+                                        (e.g. pay slip, employment certificate)
+                                    </label>
+                                    <div class="dm-upload-avatar media-import dropzone-md-s">
+                                        <p class="color-light mt-0 fs-14">Drop files here to upload</p>
+                                    </div>
+                                    <div class="avatar-up">
+                                        <input type="file" name="upload-avatar-input" class="upload-avatar-input" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="card card-default card-md mb-4">
+                    <div class="card-header">
+                        <h6>Reason for Assistance Request</h6>
+                    </div>
+                    <div class="card-body pb-md-50">
+                        <form class="was-validated">
+                            <div class="row mx-n15">
+                                <div class="col-md-3 mb-3 px-15">
+                                    <label for="validationServer08" class="il-gray fs-14 fw-500 align-center mb-10">Please describe 
+                                        your current situation and the reason for requesting cash Assistance</label>
+                                    <div class="checkbox-theme-default custom-checkbox">
+                                        <input class="checkbox" type="checkbox" name="employment" id="check-un9">
+                                        <label for="check-un9">
+                                            <span class="checkbox2-text">Unemployment</span>
+                                        </label>
+                                    </div>
+                                    <div class="checkbox-theme-default custom-checkbox">
+                                        <input class="checkbox" type="checkbox" name="employment" id="check-un10">
+                                        <label for="check-un10">
+                                            <span class="checkbox3-text">Health-related Issues</span>
+                                        </label>
+                                    </div>
+                                    <div class="checkbox-theme-default custom-checkbox">
+                                        <input class="checkbox" type="checkbox" name="employment" id="check-un11">
+                                        <label for="check-un11">
+                                            <span class="checkbox3-text">Educational Support</span>
+                                        </label>
+                                    </div>
+                                    <div class="checkbox-theme-default custom-checkbox">
+                                        <input class="checkbox" type="checkbox" name="employment" id="check-un12">
+                                        <label for="check-un12">
+                                            <span class="checkbox3text">Housing and Living Expenses</span>
+                                        </label>
+                                    </div>
+                                    <div class="checkbox-theme-default custom-checkbox">
+                                        <input class="checkbox" type="checkbox" name="employment" id="check-un13">
+                                        <label for="check-un13">
+                                            <span class="checkbox3-text">Disaster Relief</span>
+                                        </label>
+                                    </div>
+                                    <div class="checkbox-theme-default custom-checkbox">
+                                        <input class="checkbox" type="checkbox" name="employment" id="check-un14">
+                                        <label for="check-un14">
+                                            <span class="checkbox3-text">Support for Elderly or Disabled</span>
+                                        </label>
+                                    </div>
+                                    <div class="checkbox-theme-default custom-checkbox">
+                                        <input class="checkbox" type="checkbox" name="employment" id="check-un15">
+                                        <label for="check-un15">
+                                            <span class="checkbox3-text">Family Support</span>
+                                        </label>
+                                    </div>
+                                </div>   
+                                <div class="col-md-3 mb-3 px-15">
+                                    <label for="dropzone3" class="il-gray fs-14 fw-500 align-center mb-10">Medical Certificates
+                                        or other proof for special cicumstances
+                                    </label>
+                                    <div class="dm-upload-avatar media-import dropzone-md-s">
+                                        <p class="color-light mt-0 fs-14">Drop files here to upload</p>
+                                    </div>
+                                    <div class="avatar-up">
+                                        <input type="file" name="upload-avatar-input" class="upload-avatar-input" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="card card-default card-md mb-4">
+                    <div class="card-header">
+                        <h6>Data Privacy Consent</h6>
+                    </div>
+                        <div class="card-body pb-md-50">
+                            <form class="was-validated">
+                                <div class="form-group mt-10 mb-25">
+                                    <label for="dropzone3" class="il-gray fs-14 fw-500 align-center mb-10">In accordance
+                                        with the Data Privacy Act of 2012 (Republic Act No. 10173). I hereby give my consent to collect,
+                                        store, and process the information I have provided in this form for the purpose of the Cash Assistance
+                                        Request. I understand that the collection and use fo this data will be in compliance with the Data Privacy
+                                        Act of the Philippines.
+                                    </label>
+                                    <div class="custom-control checkbox-theme-default custom-checkbox mb-3 ps-0">
+                                        <input type="checkbox" class="checkbox" id="customControlValidation1" required>
+                                        <label for="customControlValidation1">
+                                            I Agree to the collection and use of my personal information as described above
+                                            <div class="invalid-feedback">You must agree before submitting.</div>
+                                        </label>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary px-30" type="submit">Submit Form</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
