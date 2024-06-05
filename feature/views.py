@@ -1,5 +1,48 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from .models import CashAssistance
+from application.models import UserProfile
+
+@login_required
+def requestCashAssistance(request):
+    if request.method == 'POST':
+        contact = request.POST['contact']
+
+        birthday = request.POST['birthday']
+        birthday = birthday.split('/')
+        formatted_birthday = birthday[2] + '-' + birthday[0] + '-' + birthday[1]
+
+        address = request.POST['address']
+        proof_of_residency = request.FILES['proof-of-residency']
+        household_member_count = request.POST['household-member-count']
+        special_categories = request.POST.getlist('special-categories')
+        employment_status = request.POST['employment']
+        monthly_income = request.POST.get('monthly-income', 0)
+        government_aid = request.POST['government-aid']
+        income_verification = request.FILES['income-verification']
+        reason = request.POST.getlist('reason')
+        other_proof = request.FILES['other-proof']
+
+        user_profile = UserProfile.objects.get(user=request.user)
+
+        cash_assistance = CashAssistance(
+            user_profile = user_profile,
+            contact = contact,
+            birthday = formatted_birthday,
+            address = address,
+            proof_of_residency = proof_of_residency,
+            household_member_count = household_member_count,
+            special_categories = special_categories,
+            employment_status = employment_status,
+            monthly_income = monthly_income,
+            government_aid = government_aid,
+            income_verification = income_verification,
+            reason = reason,
+            other_proof = other_proof
+        )
+        cash_assistance.save()
+        
+        return redirect('/feature/form/basic')
 
 # chart js page
 @login_required

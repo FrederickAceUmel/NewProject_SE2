@@ -11,10 +11,11 @@ function handleEmployment(checkbox) {
 
     // Enable income input only if 'Employed' checkbox is checked
     if (document.getElementById('check-un5').checked) {
-        incomeInput.disabled = false;
+        // incomeInput.disabled = false;
+        incomeInput.value = '';
     } else {
-        incomeInput.disabled = true;
+        // incomeInput.disabled = true;
         // Clear the input if disabled
-        incomeInput.value = ''; 
+        incomeInput.value = '0';
     }
 }

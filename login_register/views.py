@@ -54,7 +54,6 @@ def signup(request):
             profile = UserProfile(user=user)
             profile.save()
 
-            # login(request, user)
             return redirect('/')
         else:
             return render(request, 'auth/register.html', {'form': form})

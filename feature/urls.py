@@ -28,4 +28,5 @@ urlpatterns = [
     path('map/google', views.googleMap, name='google_map'),
     path('map/leaflet', views.leafletMap, name='leaflet_map'),
     path('map/vector', views.vectorMap, name='vector_map'),
+    path('request-assistance', views.requestCashAssistance, name='request_assistance')
 ]
