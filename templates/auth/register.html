@@ -36,22 +36,22 @@
                                                 {% csrf_token %}
                                                 <div class="form-group mb-20">
                                                     <label for="first_name">First Name</label>
-                                                    <input value="{% if form and form.data.first_name %} {{form.data.first_name}} {% else %}{% endif %}" type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name" required>
+                                                    <input value="{% if form and form.data.first_name %} {{form.data.first_name}} {% else %} {% endif %}" type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name" required>
                                                     {% if form and form.errors.first_name %} <div class="text-danger mt-2">{{form.errors.first_name}}</div> {% else %} {% endif %}
                                                 </div>
                                                 <div class="form-group mb-20">
                                                     <label for="last_name">Last Name</label>
-                                                    <input value="{% if form and form.data.last_name %} {{form.data.last_name}} {% else %}{% endif %}" type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name" required>
+                                                    <input value="{% if form and form.data.last_name %} {{form.data.last_name}} {% else %} {% endif %}" type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name" required>
                                                     {% if form and form.errors.last_name %} <div class="text-danger mt-2">{{form.errors.last_name}}</div> {% else %} {% endif %}
                                                 </div>
                                                 <div class="form-group mb-20">
                                                     <label for="username">Username</label>
-                                                    <input value="{% if form and form.data.username %} {{form.data.username}} {% else %}{% endif %}" type="text" class="form-control" id="username" name="username" placeholder="Username" required>
+                                                    <input value="{% if form and form.data.username %} {{form.data.username}} {% else %} {% endif %}" type="text" class="form-control" id="username" name="username" placeholder="Username" required>
                                                     {% if form and form.errors.username %} <div class="text-danger mt-2">{{form.errors.username}}</div> {% else %} {% endif %}
                                                 </div>
                                                 <div class="form-group mb-20">
                                                     <label for="email">Email Adress</label>
-                                                    <input value="{% if form and form.data.email %} {{form.data.email}} {% else %}{% endif %}" type="email" class="form-control" name="email" id="email" placeholder="Email address" required>
+                                                    <input value="{% if form and form.data.email %} {{form.data.email}} {% else %} {% endif %}" type="email" class="form-control" name="email" id="email" placeholder="Email address" required>
                                                     {% if form and form.errors.email %} <div class="text-danger mt-2">{{form.errors.email}}</div> {% else %} {% endif %}
                                                 </div>
                                                 <div class="form-group mb-15">

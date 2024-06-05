@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from .decorators import anonymous_required
 from django.contrib.auth.decorators import login_required
+<<<<<<< HEAD
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth.hashers import make_password
@@ -12,6 +13,8 @@ from application.models import UserProfile
 import secrets
 import string
 alphabet = string.ascii_letters + string.digits
+=======
+>>>>>>> Cash-Assistance-Module
 
 # show login page
 @anonymous_required
@@ -50,6 +53,7 @@ def signup(request):
                 email = request.POST['email'],
                 password = request.POST['password']
             )
+<<<<<<< HEAD
 
             profile = UserProfile(user=user)
             profile.save()
@@ -58,39 +62,18 @@ def signup(request):
             return redirect('/')
         else:
             return render(request, 'auth/register.html', {'form': form})
+=======
+            login(request, user)
+            return redirect('en/dashboard/demo-one')    
+        else:           
+            return render(request, 'auth/register.html', {'form': form})  
+>>>>>>> Cash-Assistance-Module
     return redirect('register')
 
 # show forget password page
 @anonymous_required
 def forgetPassword(request):
     return render(request, 'auth/forget.html')
-
-def sendNewPassword(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-
-        if username:
-            try:
-                user = User.objects.get(username=username)
-                newPassword = ''.join(secrets.choice(alphabet) for i in range(8))
-                user.password = make_password(newPassword)
-                user.save()
-
-                send_mail(
-                    "HexaDash - New Password",
-                    "Your new password is " + newPassword + ".",
-                    "settings.EMAIL_HOST_USER",
-                    [user.email],
-                    fail_silently=False,
-                )
-            except:
-                return redirect('forget_password')
-            
-            return redirect('/')
-        else:
-            return redirect('forget_password')
-        
-    return redirect('forget_password')
 
 # logout 
 @login_required

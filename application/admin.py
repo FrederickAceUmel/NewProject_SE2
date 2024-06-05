@@ -1,4 +1,5 @@
 from django.contrib import admin
+<<<<<<< HEAD
 from application.models import UserProfile
 
 # Register your models here.
@@ -21,3 +22,7 @@ class UserProfileAdmin(admin.ModelAdmin):
     @admin.display(ordering='user__first_name', description='First Name')
     def get_first_name(self, obj):
         return obj.user.first_name
+=======
+
+# Register your models here.
+>>>>>>> Cash-Assistance-Module
