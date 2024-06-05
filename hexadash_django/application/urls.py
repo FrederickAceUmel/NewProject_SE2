@@ -50,4 +50,6 @@ urlpatterns = [
     path('table/basic', views.basicTable, name='basic_table'),
     path('table/data', views.datatable, name='datatable'),
     path('table/dynamic-table', views.dynamicTable, name='dynamic_table'),
+    path('change-pass', views.changePassword, name='change_password'),
+    path('verify', views.verify, name='verify'),
 ]

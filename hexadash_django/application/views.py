@@ -1,5 +1,35 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.hashers import make_password
+from .models import UserProfile
+
+@login_required
+def changePassword(request):
+    if request.method == 'POST':
+        new_password = request.POST['new_password']
+        confirm_password = request.POST['confirm_password']
+
+        if new_password == confirm_password and new_password and confirm_password:
+            user = request.user
+            user.password = make_password(new_password)
+            user.save()
+            return redirect('/application/social/profile')
+        else:
+            return redirect('/application/social/profile')
+
+def verify(request):
+    if request.method == 'POST':
+        try:
+            proof_of_income = request.FILES['proof_of_income']
+            government_id = request.FILES['government_id']
+
+            userprofile = UserProfile.objects.get(user=request.user)
+            userprofile.proofOfIncome = proof_of_income
+            userprofile.governmentId = government_id
+            userprofile.save()
+            return redirect('/application/social/profile')
+        except:
+            return redirect('/application/social/profile')
 
 # email inbox page
 @login_required
