@@ -4,7 +4,6 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from .decorators import anonymous_required
 from django.contrib.auth.decorators import login_required
-<<<<<<< HEAD
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth.hashers import make_password
@@ -13,8 +12,6 @@ from application.models import UserProfile
 import secrets
 import string
 alphabet = string.ascii_letters + string.digits
-=======
->>>>>>> Cash-Assistance-Module
 
 # show login page
 @anonymous_required
@@ -53,7 +50,6 @@ def signup(request):
                 email = request.POST['email'],
                 password = request.POST['password']
             )
-<<<<<<< HEAD
 
             profile = UserProfile(user=user)
             profile.save()
@@ -62,12 +58,6 @@ def signup(request):
             return redirect('/')
         else:
             return render(request, 'auth/register.html', {'form': form})
-=======
-            login(request, user)
-            return redirect('en/dashboard/demo-one')    
-        else:           
-            return render(request, 'auth/register.html', {'form': form})  
->>>>>>> Cash-Assistance-Module
     return redirect('register')
 
 # show forget password page
