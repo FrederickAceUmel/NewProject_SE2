@@ -7,7 +7,6 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth.hashers import make_password
-from application.models import UserProfile
 
 import secrets
 import string
@@ -41,7 +40,7 @@ def register(request):
 def signup(request):
     if request.method == 'POST':
         form = AuthForm(request.POST)
-
+               
         if form.is_valid():
             user = User.objects.create_user(
                 first_name = request.POST['first_name'],
@@ -50,12 +49,9 @@ def signup(request):
                 email = request.POST['email'],
                 password = request.POST['password']
             )
-
-            profile = UserProfile(user=user)
-            profile.save()
-
+            # login(request, user)
             return redirect('/')
-        else:
+        else:           
             return render(request, 'auth/register.html', {'form': form})
     return redirect('register')
 
@@ -63,6 +59,33 @@ def signup(request):
 @anonymous_required
 def forgetPassword(request):
     return render(request, 'auth/forget.html')
+
+def sendNewPassword(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+
+        if username:
+            try:
+                user = User.objects.get(username=username)
+                newPassword = ''.join(secrets.choice(alphabet) for i in range(8))
+                user.password = make_password(newPassword)
+                user.save()
+
+                send_mail(
+                    "HexaDash - New Password",
+                    "Your new password is " + newPassword + ".",
+                    "settings.EMAIL_HOST_USER",
+                    [user.email],
+                    fail_silently=False,
+                )
+            except:
+                return redirect('forget_password')
+            
+            return redirect('/')
+        else:
+            return redirect('forget_password')
+        
+    return redirect('forget_password')
 
 # logout 
 @login_required
