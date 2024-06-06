@@ -16,7 +16,7 @@ def requestCashAssistance(request):
         proof_of_residency = request.FILES['proof-of-residency']
         household_member_count = request.POST['household-member-count']
         special_categories = request.POST.getlist('special-categories')
-        employment_status = request.POST['employment']
+        employment_status = request.POST.get('employment', None)
         monthly_income = request.POST.get('monthly-income', 0)
         government_aid = request.POST['government-aid']
         income_verification = request.FILES['income-verification']

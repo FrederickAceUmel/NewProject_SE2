@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth.hashers import make_password
+from application.models import UserProfile
 
 import secrets
 import string
@@ -49,7 +50,10 @@ def signup(request):
                 email = request.POST['email'],
                 password = request.POST['password']
             )
-            # login(request, user)
+
+            userprofile = UserProfile(user=user)
+            userprofile.save()
+
             return redirect('/')
         else:           
             return render(request, 'auth/register.html', {'form': form})
@@ -73,12 +77,13 @@ def sendNewPassword(request):
 
                 send_mail(
                     "HexaDash - New Password",
-                    "Your new password is " + newPassword + ".",
-                    "settings.EMAIL_HOST_USER",
+                    "Your new password is " + newPassword,
+                    'settings.EMAIL_HOST_USER',
                     [user.email],
                     fail_silently=False,
                 )
-            except:
+            except Exception as e:
+                print(e)
                 return redirect('forget_password')
             
             return redirect('/')
