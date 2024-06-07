@@ -8,6 +8,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth.hashers import make_password
 from application.models import UserProfile
+from django.contrib import messages
 
 import secrets
 import string
@@ -73,7 +74,6 @@ def sendNewPassword(request):
                 user = User.objects.get(username=username)
                 newPassword = ''.join(secrets.choice(alphabet) for i in range(8))
                 user.password = make_password(newPassword)
-                user.save()
 
                 send_mail(
                     "HexaDash - New Password",
@@ -82,12 +82,15 @@ def sendNewPassword(request):
                     [user.email],
                     fail_silently=False,
                 )
+
+                user.save()
             except Exception as e:
-                print(e)
+                messages.error(request, "Error")
                 return redirect('forget_password')
             
             return redirect('/')
         else:
+            messages.error(request, "Error")
             return redirect('forget_password')
         
     return redirect('forget_password')

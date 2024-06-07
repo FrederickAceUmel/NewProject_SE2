@@ -75,5 +75,26 @@
     <script src="{% static 'js/env.js' %}"></script>
 
     {% include 'partials/_scripts.html' %}
+
+    <script>
+      $(document).ready(function() {
+        $('#change-pass-form').submit(function(event) {
+            event.preventDefault()
+
+            var newValue = $('#new-password').val()
+            var confirmValue = $('#confirm-password').val()
+
+            if (newValue !== confirmValue || (!newValue && !confirmValue)) {
+                $('#change-pass-error').removeAttr('hidden')
+            } else {
+                this.submit()
+            }
+        })
+
+        $('#close-change-pass-error').click(function(event) {
+            $('#change-pass-error').attr('hidden', true)
+        })
+      })
+    </script>
   </body>
 </html>

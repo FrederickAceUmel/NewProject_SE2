@@ -38,9 +38,12 @@
                                 <div class="ap-button button-group d-flex justify-content-center flex-wrap mb-20">
                                     <button type="button" class="border text-capitalize px-25 color-gray transparent shadow2 radius-md" data-bs-toggle="modal" data-bs-target="#password-modal">
                                         <img class="svg" src="{% static 'img/svg/edit.svg' %}" alt="mail">change password</button>
-                                    <button class="btn btn-primary btn-default btn-squared text-capitalize  px-25" data-bs-toggle="modal" data-bs-target="#verify-modal"><img src="{% static 'img/svg/check.svg' %}" alt="user-plus" class="svg">
-                                        Verify
-                                    </button>
+
+                                    {% if not user.userprofile.isVerified %}
+                                        <button class="btn btn-primary btn-default btn-squared text-capitalize  px-25" data-bs-toggle="modal" data-bs-target="#verify-modal"><img src="{% static 'img/svg/check.svg' %}" alt="user-plus" class="svg">
+                                            Verify
+                                        </button>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -157,24 +160,37 @@
                     <img src="{% static 'img/svg/x.svg' %}" alt="x" class="svg">
                 </button>
             </div>
-            <form action="{% url 'application:change_password' %}" method="POST">
+            <form id="change-pass-form" action="{% url 'application:change_password' %}" method="POST">
                 {% csrf_token %}
                 <div class="modal-body">
                     <div class="card card-Vertical card-default card-md">
                         <div class="card-body">
+                            <div id="change-pass-error" class="alert-icon-big alert alert-danger alert-dismissible fade show" role="alert" hidden>
+                                <div class="alert-icon">
+                                    <img src="{% static 'img/svg/layers.svg' %}" alt="layers" class="svg">
+                                </div>
+                                <div class="alert-content">
+                                    <h6 class='alert-heading'>Invalid</h6>
+                                    <p>Passwords do not match. Please try again.</p>
+                                    <button id="close-change-pass-error" type="button" class="btn-close text-capitalize" aria-label="Close">
+                                        <img src="{% static 'img/svg/x.svg' %}" alt="x" class="svg rony" aria-hidden="true">
+                                    </button>
+                                </div>
+                            </div>
+
                             <div class="Vertical-form">
                                 <div class="form-group">
-                                    <label for="formGroupExampleInput6" class=" color-dark fs-14 fw-500 align-center mb-10">Password</label>
+                                    <label for="new-password" class=" color-dark fs-14 fw-500 align-center mb-10">Password</label>
                                     <div class="with-icon">
                                         <span class="las la-lock"></span>
-                                        <input type="password" name="new_password" class="form-control ih-medium ip-gray radius-xs b-light" id="formGroupExampleInput6">
+                                        <input type="password" name="new_password" class="form-control ih-medium ip-gray radius-xs b-light" id="new-password">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="formGroupExampleInput6" class=" color-dark fs-14 fw-500 align-center mb-10">New Password</label>
+                                    <label for="confirm-password" class=" color-dark fs-14 fw-500 align-center mb-10">New Password</label>
                                     <div class="with-icon">
                                         <span class="las la-lock"></span>
-                                        <input type="password" name="confirm_password" class="form-control ih-medium ip-gray radius-xs b-light" id="formGroupExampleInput6">
+                                        <input type="password" name="confirm_password" class="form-control ih-medium ip-gray radius-xs b-light" id="confirm-password">
                                     </div>
                                 </div>
                             </div>
@@ -199,22 +215,22 @@
                     <img src="{% static 'img/svg/x.svg' %}" alt="x" class="svg">
                 </button>
             </div>
-            <form action="{% url 'application:verify' %}" method="POST" enctype="multipart/form-data">
+            <form id="verify-form" action="{% url 'application:verify' %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="modal-body">
                     <div class="card card-Vertical card-default card-md">
                         <div class="card-body">
                             <div class="Vertical-form">
                                 <div class="form-group">
-                                    <label for="formGroupExampleInput6" class=" color-dark fs-14 fw-500 align-center mb-10">Proof of Income</label>
+                                    <label for="proof-file" class=" color-dark fs-14 fw-500 align-center mb-10">Proof of Income</label>
                                     <div class="with-icon">
-                                        <input type="file" id="proofFile" name="proof_of_income">
+                                        <input type="file" id="proof-file" name="proof_of_income">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="formGroupExampleInput6" class=" color-dark fs-14 fw-500 align-center mb-10">Government ID</label>
+                                    <label for="government-file" class=" color-dark fs-14 fw-500 align-center mb-10">Government ID</label>
                                     <div class="with-icon">
-                                        <input type="file" id="governmentFile" name="government_id">
+                                        <input type="file" id="government-file" name="government_id">
                                     </div>
                                 </div>
                             </div>
