@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import CashAssistance
 from application.models import UserProfile
+from django.contrib import messages
 
 @login_required
 def requestCashAssistance(request):
@@ -42,6 +43,7 @@ def requestCashAssistance(request):
         )
         cash_assistance.save()
         
+        messages.success(request, "Your cash assistance request has been submitted.")
         return redirect('/feature/form/basic')
 
 # chart js page

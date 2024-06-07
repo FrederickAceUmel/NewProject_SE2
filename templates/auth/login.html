@@ -118,14 +118,48 @@
     </div>
     <div class="enable-dark-mode dark-trigger">
         <ul>
-          <li>
-            <a href="#">
-              <i class="uil uil-moon"></i>
-            </a>
-          </li>
+            <li>
+                <a href="#">
+                <i class="uil uil-moon"></i>
+                </a>
+            </li>
         </ul>
-      </div>
+    </div>
+
+    <button id="modal-trigger-btn" type="button" class="btn btn-outline-lighten btn-outline-lighten__height" data-bs-toggle="modal" data-bs-target="#modal-info-success" hidden>Success</button>
+
+    <div class="modal-info-success modal fade show" id="modal-info-success" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-info" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="modal-info-body d-flex">
+                        <div class="modal-info-icon success">
+                            <img src="{% static 'img/svg/check-circle.svg' %}" alt="check-circle" class="svg">
+                        </div>
+                        <div id="modal-text-content" class="modal-info-text">
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-sm" data-bs-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="{% static 'js/env.js' %}"></script>
     {% include 'partials/_scripts.html' %}
+
+    {% if messages %}
+        {% for message in messages %}
+            <script>
+                $(document).ready(function() {
+                    $('#modal-text-content p').text('{{ message }}')
+                    $('#modal-trigger-btn').click()
+                })
+            </script>
+        {% endfor %}
+    {% endif %}
 </body>
 </html>

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
 from .models import UserProfile
+from django.contrib import messages
 
 @login_required
 def changePassword(request):
@@ -13,7 +14,8 @@ def changePassword(request):
             user = request.user
             user.password = make_password(new_password)
             user.save()
-            return redirect('/application/social/profile')
+            messages.success(request, "Your password has been changed. Please login again.")
+            return redirect('/')
         else:
             return redirect('/application/social/profile')
 

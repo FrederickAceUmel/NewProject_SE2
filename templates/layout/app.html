@@ -96,5 +96,16 @@
         })
       })
     </script>
+
+    {% if messages %}
+      {% for message in messages %}
+        <script>
+          $(document).ready(function() {
+            $('#cash-request-text p').text('{{ message }}')
+            $('#cash-request-btn').click()
+          })
+        </script>
+      {% endfor %}
+    {% endif %}
   </body>
 </html>
