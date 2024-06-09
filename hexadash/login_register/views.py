@@ -28,7 +28,7 @@ def signIn(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('en/dashboard/demo-one')
+            return redirect('en/application/social/profile')
         else:
             return redirect('/')
 

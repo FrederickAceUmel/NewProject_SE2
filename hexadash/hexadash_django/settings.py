@@ -150,7 +150,7 @@ LOCALE_PATHS = (
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
 LOGIN_URL='/'
-LOGIN_REDIRECT_URL='en/dashboard/demo-one'
+LOGIN_REDIRECT_URL='en/feature/cash-assistance'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
