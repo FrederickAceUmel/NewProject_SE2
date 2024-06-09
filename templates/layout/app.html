@@ -99,12 +99,26 @@
 
     {% if messages %}
       {% for message in messages %}
-        <script>
-          $(document).ready(function() {
-            $('#cash-request-text p').text('{{ message }}')
-            $('#cash-request-btn').click()
-          })
-        </script>
+        {% if message.message == "Verify Success" %}
+          <script>
+              $(document).ready(function() {
+                $('#verify-success-btn').click()
+              })
+          </script>
+        {% elif message.message == "Verify Failed" %}
+          <script>
+              $(document).ready(function() {
+                $('#verify-fail-btn').click()
+              })
+          </script>  
+        {% else %}
+          <script>
+            $(document).ready(function() {
+              $('#cash-request-text p').text('{{ message }}')
+              $('#cash-request-btn').click()
+            })
+          </script>
+        {% endif %}
       {% endfor %}
     {% endif %}
   </body>

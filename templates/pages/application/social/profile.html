@@ -221,7 +221,27 @@
                     <div class="card card-Vertical card-default card-md">
                         <div class="card-body">
                             <div class="Vertical-form">
-                                <div class="form-group">
+                                <div class="row mx-n15 flex justify-content-center">
+                                    <div class="mb-3 px-15">
+                                        <label for="validationServer05" class="il-gray fs-14 fw-500 align-center mb-10">Proof of Income</label>
+                                            <input name="proof-of-residency" class="form-control is-valid custom-file-input" type="file" id="proof-file" aria-describedby="validationServer05Feedback" required>
+                                        <div id="validationServer05Feedback" class="invalid-feedback">
+                                            Please provide an attachment.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mx-n15 flex justify-content-center">
+                                    <div class="mb-3 px-15">
+                                        <label for="validationServer05" class="il-gray fs-14 fw-500 align-center mb-10">Government ID</label>
+                                            <input name="government-id" class="form-control is-valid custom-file-input" type="file" id="government-file" aria-describedby="validationServer05Feedback" required>
+                                        <div id="validationServer05Feedback" class="invalid-feedback">
+                                            Please provide an attachment.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- <div class="form-group">
                                     <label for="proof-file" class=" color-dark fs-14 fw-500 align-center mb-10">Proof of Income</label>
                                     <div class="with-icon">
                                         <input type="file" id="proof-file" name="proof_of_income">
@@ -232,7 +252,7 @@
                                     <div class="with-icon">
                                         <input type="file" id="government-file" name="government_id">
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -242,6 +262,50 @@
                     <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+<button id="verify-success-btn" type="button" class="btn btn-outline-lighten btn-outline-lighten__height" data-bs-toggle="modal" data-bs-target="#verify-success-modal" hidden>Success</button>
+
+<div class="modal-info-success modal fade show" id="verify-success-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-info" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="modal-info-body d-flex">
+                    <div class="modal-info-icon success">
+                        <img src="{% static 'img/svg/check-circle.svg' %}" alt="check-circle" class="svg">
+                    </div>
+                    <div id="modal-text-content" class="modal-info-text">
+                        <p>Your verification documents have been submitted.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-sm" data-bs-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button id="verify-fail-btn" type="button" class="btn btn-outline-lighten btn-outline-lighten__height" data-bs-toggle="modal" data-bs-target="#verify-error-modal">Error</button>
+
+<div class="modal-info-error modal fade show" id="verify-error-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-info" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="modal-info-body d-flex">
+                    <div class="modal-info-icon danger">
+                        <img src="{% static 'img/svg/x-circle.svg' %}" alt="x-circle" class="svg">
+                    </div>
+                    <div class="modal-info-text">
+                        <p>Something went wrong. Please try again.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-sm" data-bs-dismiss="modal">Ok</button>
+            </div>
         </div>
     </div>
 </div>

@@ -22,15 +22,17 @@ def changePassword(request):
 def verify(request):
     if request.method == 'POST':
         try:
-            proof_of_income = request.FILES['proof_of_income']
-            government_id = request.FILES['government_id']
+            proof_of_income = request.FILES['proof-of-residency']
+            government_id = request.FILES['government-id']
 
             userprofile = UserProfile.objects.get(user=request.user)
             userprofile.proofOfIncome = proof_of_income
             userprofile.governmentId = government_id
             userprofile.save()
+            messages.success(request, "Verify Success")
             return redirect('/application/social/profile')
         except:
+            messages.error(request, "Verify Failed")
             return redirect('/application/social/profile')
 
 # email inbox page
