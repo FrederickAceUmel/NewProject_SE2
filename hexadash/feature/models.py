@@ -16,4 +16,4 @@ class CashAssistance(models.Model):
     income_verification = models.FileField(null=True, upload_to="documents/")
     reason = models.JSONField(null=True)
     other_proof = models.FileField(null=True, upload_to="documents/")
-    is_approved = models.BooleanField(default=False)
+    status = models.CharField(max_length=256, choices=[('Approved', 'Approved'), ('Decline', 'Decline'), ('Pending', 'Pending')], default='Pending')
